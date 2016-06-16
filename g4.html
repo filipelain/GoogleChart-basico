@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>texte</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+        <script type="text/javascript">
+
+            google.load('visualization', '1', {'packages': ['corechart']});
+            google.setOnLoadCallback(desenhaGrafico);
+
+            function desenhaGrafico() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Mês');
+                data.addColumn('number', 'Defeitos');
+
+                data.addRows(12);
+
+
+                data.setValue(0, 0, 'Janeiro');
+                data.setValue(0, 1, 50);
+                data.setValue(1, 0, 'Fevereiro');
+                data.setValue(1, 1, 19);
+                data.setValue(2, 0, 'Março');
+                data.setValue(2, 1, 43);
+                data.setValue(3, 0, 'Abril');
+                data.setValue(3, 1, 58);
+                data.setValue(4, 0, 'Maio');
+                data.setValue(4, 1, 44);
+                data.setValue(5, 0, 'Junho');
+                data.setValue(5, 1, 32 );
+          
+
+                var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                var option = {
+                    width: 600, height: 240,
+                    title: 'Quantidade de Defeitos',
+                    colors:['green'],
+                    curveType: 'function',
+                    vAxis: {title: 'Defeitos  encontrados'},
+                    legend: { position: 'bottom'}
+                };
+                chart.draw(data, option);
+            }
+        </script>
+    </head>
+    <body>
+
+        <h1>Defeitos Encontrados</h1>
+
+        <div id="chart_div"></div>
+
+
+
+
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>G2</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+        <script type="text/javascript">
+
+            google.load('visualization', '1', {'packages': ['corechart']});
+            google.setOnLoadCallback(desenhaGrafico);
+
+            function desenhaGrafico() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('date', 'Dia');
+                data.addColumn('number', 'corrente');
+                data.addColumn('number', 'poupança')
+
+                data.addRows(5);
+
+                data.setValue(0, 0, new Date(2011, 01, 07));
+                data.setValue(0, 1, 500.15);
+                data.setValue(0, 2, 250.0);
+
+                data.setValue(1, 0, new Date(2011, 02, 08));
+                data.setValue(1, 1, 560.06);
+                data.setValue(1, 2, 320.25);
+
+                data.setValue(2, 0, new Date(2011, 03, 09));
+                data.setValue(2, 1, 500.0);
+                data.setValue(2, 2, 330.04);
+                
+                data.setValue(3, 0, new Date(2011, 04, 10));
+                data.setValue(3, 1, 700.10);
+                data.setValue(3, 2, 300.0);
+                
+                data.setValue(4, 0, new Date(2011, 05, 11));
+                data.setValue(4, 1, 430.69);
+                data.setValue(4, 2, 420.0);
+
+                var formatter = new google.visualization.DateFormat({pattern: 'MMM dd ,yyyy'} );
+                formatter.format(data, 0);
+                var valueFormatter = new google.visualization.NumberFormat({prefix: 'R$: '});
+                valueFormatter.format(data,1);
+                valueFormatter.format(data,2);
+
+
+                var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+                var option = {
+                    width: 800, height: 600,
+                    title: 'Conta',
+                    curveType: 'function',
+                    legend: {position: 'bottom'}
+                };
+                chart.draw(data, option);
+            }
+        </script>
+    </head>
+    <body>
+
+        <h1>Minhas contas</h1>
+
+        <div id="chart_div"></div>
+
+
+
+
+    </body>
+</html>

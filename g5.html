@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>texte</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+        <script type="text/javascript">
+
+            google.load('visualization', '1', {'packages': ['corechart']});
+            google.setOnLoadCallback(desenhaGrafico);
+
+            function desenhaGrafico() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Tipo de Gastos');
+                data.addColumn('number', 'Valor Gasto');
+
+                data.addRows(4);
+
+
+                data.setValue(0, 0, 'alimentação');
+                data.setValue(0, 1, 450.0);
+                data.setValue(1, 0, 'Familia');
+                data.setValue(1, 1, 457);
+                data.setValue(2, 0, 'Saúde');
+                data.setValue(2, 1, 460.0);
+                data.setValue(3, 0, 'Combustível ');
+                data.setValue(3, 1, 670.0);
+
+
+
+
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                var option = {
+                    width: 650, height: 650,
+                    title: 'Meus Gastos',
+                    curveType: 'function',
+                    is3D: true,
+                    vAxis: {title: 'Defeitos  encontrados'},
+                    legend: {position: 'bottom'}
+                };
+                chart.draw(data, option);
+                google.visualization.events.addListener(chart, 'select', avisaDoClique);
+                function avisaDoClique(event) {
+                    document.getElementById('msg').innerHTML += "Clique efetuado! ";
+                }
+
+            }
+        </script>
+    </head>
+    <body>
+
+        <h1>Meus Gastos</h1>
+
+        <div id="chart_div"></div>
+        <div id="msg"></div>
+
+
+
+
+    </body>
+</html>

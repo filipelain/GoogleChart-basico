@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type=text/javascript src=https://www.google.com/jsapi></script>
+        <script type=text/javascript>
+
+         google.load('visualization', '1', {'packages': ['corechart']});
+            google.setOnLoadCallback(desenhaGrafico);
+
+            function desenhaGrafico() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('string', 'Tipo do gasto');
+                data.addColumn('number', 'Valor gasto');
+                
+        data.addRows(4);
+                
+                data.setValue(0, 0, 'Alimentação');
+                data.setValue(0, 1, 853);
+                data.setValue(1, 0, 'Combustível');
+                data.setValue(1, 1, 670);
+                data.setValue(2, 0, 'Família');
+                data.setValue(2, 1, 457);
+                data.setValue(3, 0, 'Saúde');
+                data.setValue(3, 1, 460);
+
+      
+                var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+
+              
+                 var option = {
+                    width: 650, height: 650,
+                    title: 'Tipos do gastos',
+                    curveType: 'function',
+                    is3D: true,
+                    vAxis: {title: 'Defeitos  encontrados'},
+                    legend: {position: 'bottom'}
+                };
+                chart.draw(data, option);
+
+                google.visualization.events.addListener(chart, 'select', mouseEventHandler);
+
+                function mouseEventHandler(event) {
+                    var selecionados = chart.getSelection();
+                    var escolhido = selecionados[0].row;
+                    var tipoDeGasto = data.getFormattedValue(escolhido, 0);
+                    var valorGasto = data.getFormattedValue(escolhido, 1);
+                    
+                     document.getElementById('msg').innerHTML += "Gasto: "+tipoDeGasto+": R$ "+valorGasto+"<br>" ;
+                    
+                    
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>Gastos por mês</h1>
+
+        <div id="chart_div"></div>
+        <div id="msg"></div>
+    </body>
+</html>
